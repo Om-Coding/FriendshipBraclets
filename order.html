@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <title>Friendship Bracelet Studio</title>
+    <style>
+      :root {
+        --primary-gradient: linear-gradient(
+          135deg,
+          #ff6b6b,
+          #ffd93d,
+          #6bcf7f,
+          #4ecdc4,
+          #45b7d1,
+          #96ceb4
+        );
+        --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --accent-color: #ff6b6b;
+        --text-dark: #2c3e50;
+        --text-light: #ffffff;
+        --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        --hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Animated background elements */
+      .bg-shapes {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .shape {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.1;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .shape:nth-child(1) {
+        width: 80px;
+        height: 80px;
+        background: var(--accent-color);
+        top: 10%;
+        left: 10%;
+        animation-delay: -1s;
+      }
+
+      .shape:nth-child(2) {
+        width: 60px;
+        height: 60px;
+        background: #ffd93d;
+        top: 70%;
+        left: 80%;
+        animation-delay: -3s;
+      }
+
+      .shape:nth-child(3) {
+        width: 100px;
+        height: 100px;
+        background: #6bcf7f;
+        top: 30%;
+        left: 70%;
+        animation-delay: -2s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(180deg);
+        }
+      }
+
+      /* Modern glassmorphism navbar */
+      .navbar {
+        background: rgba(255, 255, 255, 0.15) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.8rem;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: rainbow 3s ease-in-out infinite;
+      }
+
+      @keyframes rainbow {
+        0%,
+        100% {
+          filter: hue-rotate(0deg);
+        }
+        50% {
+          filter: hue-rotate(180deg);
+        }
+      }
+
+      .nav-link {
+        color: var(--text-light) !important;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        position: relative;
+        transition: all 0.3s ease;
+        margin: 0 10px;
+      }
+
+      .nav-link:hover {
+        color: var(--accent-color) !important;
+        transform: translateY(-2px);
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-gradient);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      /* Hero section */
+      .hero {
+        min-height: 80vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        position: relative;
+        padding: 100px 0;
+      }
+
+      .hero-content {
+        max-width: 800px;
+        color: var(--text-light);
+      }
+
+      .hero h1 {
+        font-size: 4rem;
+        font-weight: 800;
+        margin-bottom: 1.5rem;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: slideInUp 1s ease-out;
+      }
+
+      .hero p {
+        font-size: 1.3rem;
+        margin-bottom: 2rem;
+        opacity: 0.9;
+        animation: slideInUp 1s ease-out 0.2s both;
+      }
+
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Enhanced CTA button */
+      .cta-button {
+        background: var(--primary-gradient);
+        border: none;
+        color: var(--text-light);
+        font-size: 1.2rem;
+        font-weight: 600;
+        padding: 15px 40px;
+        border-radius: 50px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        box-shadow: var(--card-shadow);
+        position: relative;
+        overflow: hidden;
+        animation: slideInUp 1s ease-out 0.4s both;
+      }
+
+      .cta-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+
+      .cta-button:hover::before {
+        left: 100%;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--hover-shadow);
+        color: var(--text-light);
+      }
+
+      .cta-button i {
+        transition: transform 0.3s ease;
+      }
+
+      .cta-button:hover i {
+        transform: translateX(5px);
+      }
+
+      /* Feature cards */
+      .features {
+        padding: 80px 0;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .feature-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        height: 100%;
+        color: var(--text-light);
+      }
+
+      .feature-card:hover {
+        transform: translateY(-10px);
+        box-shadow: var(--hover-shadow);
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .feature-icon {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .feature-title {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+      }
+
+      .feature-description {
+        opacity: 0.9;
+        line-height: 1.6;
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .hero h1 {
+          font-size: 2.5rem;
+        }
+
+        .hero p {
+          font-size: 1.1rem;
+        }
+
+        .cta-button {
+          font-size: 1rem;
+          padding: 12px 30px;
+        }
+
+        .navbar-brand {
+          font-size: 1.5rem;
+        }
+      }
+
+      /* Bracelet animation */
+      .bracelet-animation {
+        position: absolute;
+        top: 20%;
+        right: 10%;
+        width: 60px;
+        height: 60px;
+        animation: spin 8s linear infinite;
+      }
+
+      @keyframes spin {
+        from {
+          transform: rotate(0deg);
+        }
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      .bracelet-emoji {
+        font-size: 3rem;
+        filter: drop-shadow(0 0 20px rgba(255, 107, 107, 0.5));
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Animated background shapes -->
+    <div class="bg-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+
+    <!-- Enhanced navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <i class="fas fa-gem me-2"></i>Friendship Studio
+        </a>
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link active" aria-current="page" href="index.html">
+              <i class="fas fa-home me-1"></i>Home
+            </a>
+            <a class="nav-link" href="order.html">
+              <i class="fas fa-shopping-cart me-1"></i>Order
+            </a>
+            <a class="nav-link" href="about.html">
+              <i class="fas fa-info-circle me-1"></i>About
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Hero section -->
+    <section class="hero">
+      <div class="bracelet-animation">
+        <div class="bracelet-emoji">🎨</div>
+      </div>
+      <div class="container">
+        <div class="hero-content">
+          <h1>Friendship Bracelets</h1>
+          <p>
+            Create beautiful, personalized bracelets that celebrate your unique
+            bonds of friendship. Each bracelet tells a story of connection,
+            love, and shared memories.
+          </p>
+          <a
+            href="https://script.google.com/macros/s/AKfycbzEvn0-qojS-IC5-MyqF3aabOOI1_vO5p3eRUA5j3Z8MtCK7tKuBm16aUWZTx_ucuYztQ/exec"
+            class="cta-button"
+          >
+            <i class="fas fa-sparkles"></i>
+            Start Creating
+            <i class="fas fa-arrow-right"></i>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features section -->
+    <section class="features">
+      <div class="container">
+        <div class="row g-4">
+          <div class="col-md-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-palette"></i>
+              </div>
+              <h3 class="feature-title">Custom Colors</h3>
+              <p class="feature-description">
+                Choose from a rainbow of colors to match your personality and
+                style. Every bracelet is as unique as your friendship.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-heart"></i>
+              </div>
+              <h3 class="feature-title">Made with Love</h3>
+              <p class="feature-description">
+                Each bracelet is handcrafted with care and attention to detail,
+                ensuring a special piece for your special someone.
+              </p>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="feature-card">
+              <div class="feature-icon">
+                <i class="fas fa-shipping-fast"></i>
+              </div>
+              <h3 class="feature-title">Fast Delivery</h3>
+              <p class="feature-description">
+                Get your beautiful bracelets delivered quickly so you can start
+                celebrating your friendships right away.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
