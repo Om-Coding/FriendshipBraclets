@@ -1,0 +1,638 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+      rel="stylesheet"
+    />
+    <title>About - Friendship Bracelet Studio</title>
+    <style>
+      :root {
+        --primary-gradient: linear-gradient(
+          135deg,
+          #ff6b6b,
+          #ffd93d,
+          #6bcf7f,
+          #4ecdc4,
+          #45b7d1,
+          #96ceb4
+        );
+        --secondary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        --accent-color: #ff6b6b;
+        --text-dark: #2c3e50;
+        --text-light: #ffffff;
+        --card-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        --hover-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        overflow-x: hidden;
+      }
+
+      /* Animated background elements */
+      .bg-shapes {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+      }
+
+      .shape {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.1;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .shape:nth-child(1) {
+        width: 80px;
+        height: 80px;
+        background: var(--accent-color);
+        top: 10%;
+        left: 10%;
+        animation-delay: -1s;
+      }
+
+      .shape:nth-child(2) {
+        width: 60px;
+        height: 60px;
+        background: #ffd93d;
+        top: 70%;
+        left: 80%;
+        animation-delay: -3s;
+      }
+
+      .shape:nth-child(3) {
+        width: 100px;
+        height: 100px;
+        background: #6bcf7f;
+        top: 30%;
+        left: 70%;
+        animation-delay: -2s;
+      }
+
+      .shape:nth-child(4) {
+        width: 40px;
+        height: 40px;
+        background: #4ecdc4;
+        top: 50%;
+        left: 20%;
+        animation-delay: -4s;
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-20px) rotate(180deg);
+        }
+      }
+
+      /* Modern glassmorphism navbar */
+      .navbar {
+        background: rgba(255, 255, 255, 0.15) !important;
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        transition: all 0.3s ease;
+      }
+
+      .navbar-brand {
+        font-weight: 700;
+        font-size: 1.8rem;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: rainbow 3s ease-in-out infinite;
+      }
+
+      @keyframes rainbow {
+        0%,
+        100% {
+          filter: hue-rotate(0deg);
+        }
+        50% {
+          filter: hue-rotate(180deg);
+        }
+      }
+
+      .nav-link {
+        color: var(--text-light) !important;
+        font-weight: 500;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+        position: relative;
+        transition: all 0.3s ease;
+        margin: 0 10px;
+      }
+
+      .nav-link:hover {
+        color: var(--accent-color) !important;
+        transform: translateY(-2px);
+      }
+
+      .nav-link::after {
+        content: "";
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary-gradient);
+        transition: width 0.3s ease;
+      }
+
+      .nav-link:hover::after {
+        width: 100%;
+      }
+
+      .nav-link.active::after {
+        width: 100%;
+      }
+
+      /* Page header */
+      .page-header {
+        padding: 120px 0 60px;
+        text-align: center;
+        color: var(--text-light);
+      }
+
+      .page-header h1 {
+        font-size: 3.5rem;
+        font-weight: 800;
+        margin-bottom: 1rem;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        animation: slideInUp 1s ease-out;
+      }
+
+      .page-header p {
+        font-size: 1.2rem;
+        opacity: 0.9;
+        animation: slideInUp 1s ease-out 0.2s both;
+      }
+
+      @keyframes slideInUp {
+        from {
+          opacity: 0;
+          transform: translateY(50px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      /* Content sections */
+      .content-section {
+        padding: 60px 0;
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(10px);
+      }
+
+      .content-card {
+        background: rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 20px;
+        padding: 2.5rem;
+        margin-bottom: 2rem;
+        transition: all 0.3s ease;
+        color: var(--text-light);
+      }
+
+      .content-card:hover {
+        transform: translateY(-5px);
+        box-shadow: var(--hover-shadow);
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .content-card h2 {
+        font-size: 2rem;
+        font-weight: 700;
+        margin-bottom: 1.5rem;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+        display: flex;
+        align-items: center;
+        gap: 15px;
+      }
+
+      .content-card h2 i {
+        font-size: 1.5rem;
+      }
+
+      .content-card p {
+        font-size: 1.1rem;
+        line-height: 1.8;
+        opacity: 0.95;
+        margin-bottom: 1.5rem;
+      }
+
+      .content-card:last-child p:last-child {
+        margin-bottom: 0;
+      }
+
+      /* Values grid */
+      .values-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+        margin-top: 2rem;
+      }
+
+      .value-item {
+        background: rgba(255, 255, 255, 0.1);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: 15px;
+        padding: 1.5rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        color: var(--text-light);
+      }
+
+      .value-item:hover {
+        transform: translateY(-5px);
+        background: rgba(255, 255, 255, 0.2);
+      }
+
+      .value-item i {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+        background: var(--primary-gradient);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .value-item h3 {
+        font-size: 1.3rem;
+        font-weight: 600;
+        margin-bottom: 0.8rem;
+      }
+
+      .value-item p {
+        opacity: 0.9;
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      /* Timeline */
+      .timeline {
+        position: relative;
+        padding-left: 2rem;
+      }
+
+      .timeline::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 2px;
+        background: var(--primary-gradient);
+      }
+
+      .timeline-item {
+        position: relative;
+        margin-bottom: 2rem;
+        padding-left: 2rem;
+      }
+
+      .timeline-item::before {
+        content: '';
+        position: absolute;
+        left: -1.5rem;
+        top: 0.5rem;
+        width: 12px;
+        height: 12px;
+        background: var(--accent-color);
+        border-radius: 50%;
+        border: 2px solid var(--text-light);
+      }
+
+      .timeline-item h4 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin-bottom: 0.5rem;
+        color: var(--text-light);
+      }
+
+      .timeline-item p {
+        opacity: 0.9;
+        line-height: 1.6;
+        color: var(--text-light);
+      }
+
+      /* CTA section */
+      .cta-section {
+        padding: 60px 0;
+        text-align: center;
+        color: var(--text-light);
+      }
+
+      .cta-button {
+        background: var(--primary-gradient);
+        border: none;
+        color: var(--text-light);
+        font-size: 1.2rem;
+        font-weight: 600;
+        padding: 15px 40px;
+        border-radius: 50px;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        transition: all 0.3s ease;
+        box-shadow: var(--card-shadow);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .cta-button::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
+        transition: left 0.5s ease;
+      }
+
+      .cta-button:hover::before {
+        left: 100%;
+      }
+
+      .cta-button:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--hover-shadow);
+        color: var(--text-light);
+      }
+
+      .cta-button i {
+        transition: transform 0.3s ease;
+      }
+
+      .cta-button:hover i {
+        transform: translateX(5px);
+      }
+
+      /* Responsive design */
+      @media (max-width: 768px) {
+        .page-header h1 {
+          font-size: 2.5rem;
+        }
+
+        .content-card {
+          padding: 1.5rem;
+        }
+
+        .content-card h2 {
+          font-size: 1.5rem;
+        }
+
+        .navbar-brand {
+          font-size: 1.5rem;
+        }
+
+        .timeline {
+          padding-left: 1.5rem;
+        }
+
+        .timeline-item {
+          padding-left: 1.5rem;
+        }
+      }
+
+      /* Floating bracelet elements */
+      .floating-bracelet {
+        position: absolute;
+        font-size: 2rem;
+        animation: floatBracelet 4s ease-in-out infinite;
+        opacity: 0.7;
+      }
+
+      .floating-bracelet:nth-child(1) {
+        top: 20%;
+        right: 10%;
+        animation-delay: 0s;
+      }
+
+      .floating-bracelet:nth-child(2) {
+        top: 60%;
+        left: 5%;
+        animation-delay: -2s;
+      }
+
+      @keyframes floatBracelet {
+        0%, 100% {
+          transform: translateY(0px) rotate(0deg);
+        }
+        50% {
+          transform: translateY(-15px) rotate(180deg);
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Animated background shapes -->
+    <div class="bg-shapes">
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+      <div class="shape"></div>
+    </div>
+
+    <!-- Floating bracelet elements -->
+    <div class="floating-bracelet">🎗️</div>
+    <div class="floating-bracelet">💫</div>
+
+    <!-- Enhanced navbar -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <div class="container">
+        <a class="navbar-brand" href="#">
+          <i class="fas fa-gem me-2"></i>Friendship Studio
+        </a>
+        <button
+          class="navbar-toggler border-0"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav ms-auto">
+            <a class="nav-link" href="home.html">
+              <i class="fas fa-home me-1"></i>Home
+            </a>
+            <a class="nav-link" href="order.html">
+              <i class="fas fa-shopping-cart me-1"></i>Order
+            </a>
+            <a class="nav-link active" aria-current="page" href="about.html">
+              <i class="fas fa-info-circle me-1"></i>About
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Page header -->
+    <section class="page-header">
+      <div class="container">
+        <h1>Our Story</h1>
+        <p>Connecting hearts through handcrafted friendship bracelets</p>
+      </div>
+    </section>
+
+    <!-- Content sections -->
+    <section class="content-section">
+      <div class="container">
+        <div class="content-card">
+          <h2>
+            <i class="fas fa-heart"></i>
+            Our Mission
+          </h2>
+          <p>
+            At Friendship Bracelet Studio, we believe that friendships are the colorful threads that weave together the fabric of our lives. Our mission is to create beautiful, meaningful bracelets that celebrate the unique bonds between friends, family members, and loved ones.
+          </p>
+          <p>
+            Every bracelet we craft tells a story of connection, love, and shared memories. We pour our hearts into each creation, ensuring that every piece is as special and unique as the relationship it represents.
+          </p>
+        </div>
+
+        <div class="content-card">
+          <h2>
+            <i class="fas fa-star"></i>
+            Our Values
+          </h2>
+          <div class="values-grid">
+            <div class="value-item">
+              <i class="fas fa-hands-helping"></i>
+              <h3>Craftsmanship</h3>
+              <p>Every bracelet is meticulously handcrafted with attention to detail and quality materials.</p>
+            </div>
+            <div class="value-item">
+              <i class="fas fa-rainbow"></i>
+              <h3>Creativity</h3>
+              <p>We embrace vibrant colors and unique designs that reflect individual personalities and styles.</p>
+            </div>
+            <div class="value-item">
+              <i class="fas fa-users"></i>
+              <h3>Connection</h3>
+              <p>We celebrate the power of friendship and the joy of giving meaningful gifts to those we love.</p>
+            </div>
+            <div class="value-item">
+              <i class="fas fa-leaf"></i>
+              <h3>Sustainability</h3>
+              <p>We're committed to using eco-friendly materials and sustainable practices in our crafting process.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <h2>
+            <i class="fas fa-road"></i>
+            Our Journey
+          </h2>
+          <div class="timeline">
+            <div class="timeline-item">
+              <h4>2018 - The Beginning</h4>
+              <p>Started as a small passion project, creating bracelets for friends and family during summer camp.</p>
+            </div>
+            <div class="timeline-item">
+              <h4>2020 - Growing Community</h4>
+              <p>Expanded to serve local communities, hosting bracelet-making workshops and events.</p>
+            </div>
+            <div class="timeline-item">
+              <h4>2022 - Going Digital</h4>
+              <p>Launched our online platform to share the joy of friendship bracelets with people everywhere.</p>
+            </div>
+            <div class="timeline-item">
+              <h4>2024 - Today</h4>
+              <p>Continuing to spread happiness one bracelet at a time, with thousands of friendships celebrated.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card">
+          <h2>
+            <i class="fas fa-magic"></i>
+            What Makes Us Special
+          </h2>
+          <p>
+            What sets us apart is our deep understanding that friendship bracelets are more than just accessories—they're symbols of love, loyalty, and lasting bonds. Each bracelet is created with intention, care, and the hope that it will bring joy to both the giver and receiver.
+          </p>
+          <p>
+            We use only the finest materials, from vibrant cotton threads to durable clasps, ensuring that your bracelet will be as enduring as the friendship it represents. Our custom color combinations and patterns are designed to capture the unique essence of each relationship.
+          </p>
+          <p>
+            Whether you're celebrating a new friendship, honoring a lifelong bond, or simply spreading a little joy, our bracelets are designed to make every moment more meaningful.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA section -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 style="font-size: 2.5rem; font-weight: 700; margin-bottom: 1rem; background: var(--primary-gradient); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">
+          Ready to Create Something Beautiful?
+        </h2>
+        <p style="font-size: 1.2rem; margin-bottom: 2rem; opacity: 0.9;">
+          Start your friendship bracelet journey today and celebrate the special bonds in your life.
+        </p>
+        <a
+          href="https://script.google.com/macros/s/AKfycbzEvn0-qojS-IC5-MyqF3aabOOI1_vO5p3eRUA5j3Z8MtCK7tKuBm16aUWZTx_ucuYztQ/exec"
+          class="cta-button"
+        >
+          <i class="fas fa-sparkles"></i>
+          Start Creating
+          <i class="fas fa-arrow-right"></i>
+        </a>
+      </div>
+    </section>
+
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+      crossorigin="anonymous"
+    ></script>
+  </body>
+</html>
